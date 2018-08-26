@@ -1,1 +1,1 @@
-Mine løsninger må mandagøvelserne pushes efter behov. vh Helle
+Mine løsninger på mandagøvelserne pushes efter behov. vh Helle
