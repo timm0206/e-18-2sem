@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div></div>
+        <script>
+            //funktionen arealudregning kaldes med parametrene l og w
+            function areaUdregning(l,w){
+                //hvis l og w er tal
+                if(Number(l) && Number(w)){
+                   //returner areal-besked
+                   return "areal: " + l * w;
+                }
+                //hvis l og/eller w ikke er tal: returner en fejlbesked
+                else{
+                    return "Kan ikke regne det ud";
+                }
+            }
+            //***funktion arealudregning slut
+
+            //funktion brugerKontakt
+            function brugerKontakt(){
+                //erklær variablerne length og width - bed bruger om værdier
+               let length = prompt("Længde?"),
+                   width = prompt("Bredde?"),
+                //erklær variablen besked - giv den værdi ved at kalde
+                //areaUdregning med length og width som parametre
+                   besked = areaUdregning(length, width);
+                //giv bruger besked
+                alert(besked);
+                //hvis brugeren siger ja til at starte forfra,
+                if(confirm("Vil du starte forfra")){
+                    //så kald brugerKontakt på ny
+                    brugerKontakt();
+                }
+            }
+            //***funktion brugerKontakt slut
+
+            //kald brugerKontakt
+            brugerKontakt();
+
+        </script>
+    </body>
+</html>
