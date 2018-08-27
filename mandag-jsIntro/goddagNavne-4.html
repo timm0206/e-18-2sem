@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div></div>
+        <script>
+            //Erklær af fornavn, efternavn og besked - bed bruger om fornavn og efternavn
+            let fornavn = prompt("Må jeg få dit fornavn?"),
+                efternavn = prompt("Må jeg få dit efterfornavn?"),
+                besked;
+            //sæt besked til "Goddag"
+            besked = "Goddag";
+            //er fornavn opgivet, tilføj mellemrum + fornavn til besked
+            if(fornavn !=null && fornavn!=""){
+                besked += " " + fornavn;
+            }
+            //er efternavn opgivet, tilføj mellemrum+efternavn til besked
+            if(efternavn !=null && efternavn!=""){
+                besked += " " + efternavn;
+            }
+            //er besked "Goddag", så tilfør mellemrum "min ven
+            if(besked == "Goddag"){
+                besked += " min ven";
+            }
+            //giv besked
+            alert(besked);
+        </script>
+    </body>
+</html>

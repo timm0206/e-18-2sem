@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div></div>
+        <script>
+            //erklær length, width og besked - bed bruger om length og width
+            let length = prompt("Må jeg få længden?"),
+                width = prompt("Må jeg få bredden?"),
+                besked;
+            //hvis både width og length er tal
+            if(Number(width) && Number(length) ){
+                //udskriv arealet til brugeren
+                alert("Længde: " +
+                    length + " meter\nBredden: " +
+                    width + " \meter \nArealet: " +
+                    length*width + " kvadratmeter");
+            }
+            //ellers
+            else{
+                //udskriv fejlmelding
+                alert("Kan ikke regne det ud");
+            }
+            //hvis brugeren vil starte forfra
+            if(confirm("Vil du starte forfra?")){
+                //start forfra
+                location.reload();
+            }
+        </script>
+    </body>
+</html>
