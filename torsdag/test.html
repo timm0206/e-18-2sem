@@ -1,0 +1,36 @@
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #myBox{width: 100px; height: 100px; border: solid 3px gray;}
+            .pinkTekst{color:deeppink;}
+        </style>
+    </head>
+    <body>
+        <div id="myBox"></div><br><br>
+<script>
+document.addEventListener("DOMContentLoaded", start);
+function start() {
+    myBox = document.querySelector("#myBox");
+
+    myBox.addEventListener("click", doSomething);
+    function doSomething() {
+        myBox.removeEventListener("click", doSomething);
+        myBox.addEventListener("click", doSomethingElse);
+        myBox.textContent =  "Helooo";
+        myBox.innerHTML += "<h1>Hej</h1><img src='kat.gif'>";
+        myBox.style.backgroundColor = "lightblue"; // brug alle farveværdier
+        myBox.classList.add('pinkTekst') // indsætter eller tilføjer class
+        //myBox.classList.remove('pinkTekst') // fjerner class
+    }
+    function doSomethingElse(){myBox.textContent="";}
+}
+</script>
+    </body>
+</html>
