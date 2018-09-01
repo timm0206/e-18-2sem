@@ -7,7 +7,7 @@
     "mail": "tobiaszagal@gmail.com",
     "adresse": "rådmand steins alle",
     "alder": 22,
-    "civilstatus": "yeet",
+    "civilstatus": "single",
     "tlf": 20137207,
     "facebook": "https://www.facebook.com/tobiasjung.zagal",
     "hobby": "maymay",
@@ -431,22 +431,8 @@
     "tlf": "",
     "facebook": "https://www.facebook.com/marck.olsen",
     "hobby": "Løvens hule",
-    "sex": "Køleskab",
+    "sex": "M",
     "billede": "https://scontent-arn2-1.xx.fbcdn.net/v/t1.0-9/22448083_10214083411030484_7094771498486504218_n.jpg?_nc_cat=0&oh=df142f952f199d62d80b5df05f6f4de2&oe=5BFA0922"
-  },
-  {
-    "navn": "Njomza Rrahimi",
-    "github": "njom0001",
-    "website": "njomzarrahimi.com",
-    "mail": "njomzarrahimi@hotmail.com",
-    "adresse": "4681 Herfølge",
-    "alder": 20,
-    "civilstatus": "non of ya biz",
-    "tlf": 52821414,
-    "facebook": "https://www.facebook.com/xomxa?ref=bookmarks",
-    "hobby": "Mange ting",
-    "sex": "Strong independent woman",
-    "billede": "https://scontent-arn2-1.xx.fbcdn.net/v/t1.0-9/28167118_1964745377111132_4142468388497003975_n.jpg?_nc_cat=0&oh=290c78096fafd1f3051d8c5cc6ce28e8&oe=5BF0AEFB"
   },
   {
     "navn": "Morten Fuglevik",
