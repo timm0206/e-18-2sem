@@ -1,75 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Hent JSON</title>
     <style>
-        body{
-            background-color:rgb(240,240,240);
+        body {
+            background-color: rgb(240, 240, 240);
         }
-        article{
+
+        article {
             padding: 1em;
-            background-color:white;
+            background-color: white;
         }
-        .data-container article img{
-            width:100%;
+
+        .data-container article img {
+            width: 100%;
         }
-        .data-container{
+
+        .data-container {
             margin: 0 auto;
-            display:grid;
+            display: grid;
         }
-       @media screen and (min-width:580px){
-            .data-container{
-                padding-left:10%;
-                padding-right:10%;
+
+        @media screen and (min-width:580px) {
+            .data-container {
+                padding-left: 10%;
+                padding-right: 10%;
                 grid-gap: 5px;
                 grid-template-columns: repeat(3, 1fr);
             }
         }
-
-
     </style>
 </head>
+
 <body>
     <main class="container">
-       <section class="data-container"></section>
+        <section class="data-container"></section>
     </main>
-   <template class="data-template">
-      <article class="person">
-          <h2></h2>
-          <img src="" alt=""><br>
-          mail: <a class="data-mail" href=""></a><br>
-          github: <span class="data-github"></span><br>
-          tlf: <span class="data-tlf"></span><br>
-      </article>
-   </template>
+    <template class="data-template">
+        <article class="person">
+            <h2></h2>
+            <img src="" alt=""><br>
+            Status: <a class="data-civil-status" href=""></a><br>
 
-   <script>
-       let personer;
+        </article>
+    </template>
+
+    <script>
+        let personer;
         document.addEventListener("DOMContentLoaded", hentJson);
 
-        async function hentJson(){
+        async function hentJson() {
             let myJson = await fetch("personliste.json");
             personer = await myJson.json();
             visPersoner();
         }
-       function visPersoner(){
-           let dest = document.querySelector(".data-container"),
-           temp = document.querySelector(".data-template");
-           //løb personlisten igennem og lav en klon
-           personer.forEach( person => {
+
+        function visPersoner() {
+            let dest = document.querySelector(".data-container"),
+                temp = document.querySelector(".data-template");
+            //løb personlisten igennem og lav en klon
+            personer.forEach(person => {
                 let klon = temp.cloneNode(true).content;
                 //indsæt data i klonen
                 klon.querySelector("h2").textContent = person.navn;
                 klon.querySelector("img").src = person.billede;
-                klon.querySelector(".data-github").textContent = person.github;
-                klon.querySelector(".data-tlf").textContent = person.tlf;
-                klon.querySelector(".data-mail").textContent = person.mail;
-                klon.querySelector(".data-mail").href = "mailto:" + person.mail;
+                klon.querySelector(".data-civil-status").textContent = person.civilstatus;
                 //placer klon i DOM
                 dest.appendChild(klon);
-           } )
-       }
+            })
+        }
     </script>
 </body>
+
 </html>
