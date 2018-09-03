@@ -31,10 +31,22 @@
                 grid-template-columns: repeat(3, 1fr);
             }
         }
+
+        header {
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
+    <header>
+        <nav>
+            <button class="menu-item" data-civil-status="alle">Alle personer</button>
+            <button class="menu-item" data-civil-status="alle">Single</button>
+            <button class="menu-item" data-civil-status="alle">Optaget</button>
+
+        </nav>
+    </header>
     <main class="container">
         <section class="data-container"></section>
     </main>
@@ -48,8 +60,8 @@
     </template>
 
     <script>
-        let personer;
-        civilFilter = "single";
+        let personer,
+            civilFilter = "single";
         document.addEventListener("DOMContentLoaded", hentJson);
 
         async function hentJson() {
