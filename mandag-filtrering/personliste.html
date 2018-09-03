@@ -49,6 +49,7 @@
 
     <script>
         let personer;
+        civilFilter = "single";
         document.addEventListener("DOMContentLoaded", hentJson);
 
         async function hentJson() {
@@ -62,13 +63,15 @@
                 temp = document.querySelector(".data-template");
             //løb personlisten igennem og lav en klon
             personer.forEach(person => {
-                let klon = temp.cloneNode(true).content;
-                //indsæt data i klonen
-                klon.querySelector("h2").textContent = person.navn;
-                klon.querySelector("img").src = person.billede;
-                klon.querySelector(".data-civil-status").textContent = person.civilstatus;
-                //placer klon i DOM
-                dest.appendChild(klon);
+                if (person.civilstatus == civilFilter) {
+                    let klon = temp.cloneNode(true).content;
+                    //indsæt data i klonen
+                    klon.querySelector("h2").textContent = person.navn;
+                    klon.querySelector("img").src = person.billede;
+                    klon.querySelector(".data-civil-status").textContent = person.civilstatus;
+                    //placer klon i DOM
+                    dest.appendChild(klon);
+                }
             })
         }
     </script>
