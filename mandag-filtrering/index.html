@@ -40,10 +40,11 @@
 
 <body>
     <header>
+        <h1></h1>
         <nav>
             <button class="menu-item" data-civil-status="alle">Alle personer</button>
-            <button class="menu-item" data-civil-status="alle">Single</button>
-            <button class="menu-item" data-civil-status="alle">Optaget</button>
+            <button class="menu-item" data-civil-status="single">Single</button>
+            <button class="menu-item" data-civil-status="optaget">Optaget</button>
 
         </nav>
     </header>
@@ -54,33 +55,51 @@
         <article class="person">
             <h2></h2>
             <img src="" alt=""><br>
-            Status: <a class="data-civil-status" href=""></a><br>
+            Github: <a class="data-github" href=""></a><br>
 
         </article>
     </template>
 
     <script>
-        let personer,
-            civilFilter = "single";
         document.addEventListener("DOMContentLoaded", hentJson);
+
+        let dest = document.querySelector(".data-container"),
+            personer,
+            civilFilter = "alle";
 
         async function hentJson() {
             let myJson = await fetch("personliste.json");
             personer = await myJson.json();
             visPersoner();
         }
+        document.querySelectorAll(".menu-item").forEach(knap => {
+            knap.addEventListener("click", filtrering)
+        });
+
+        function filtrering() {
+            dest.textContent = "";
+            civilFilter = this.getAttribute("data-civil-status");
+            visPersoner();
+        }
+
 
         function visPersoner() {
             let dest = document.querySelector(".data-container"),
                 temp = document.querySelector(".data-template");
+            document.querySelector("header h1").textContent = civilFilter;
             //løb personlisten igennem og lav en klon
             personer.forEach(person => {
-                if (person.civilstatus == civilFilter) {
+                if (person.civilstatus == civilFilter || civilFilter == "alle") {
                     let klon = temp.cloneNode(true).content;
                     //indsæt data i klonen
                     klon.querySelector("h2").textContent = person.navn;
                     klon.querySelector("img").src = person.billede;
-                    klon.querySelector(".data-civil-status").textContent = person.civilstatus;
+                    //Modal single view
+                    klon.querySelector("img").addEventListener("click", () => {
+                        window.location.href = "single.html?github=" + person.github
+                    });
+                    //Modal single view slut
+                    //klon.querySelector(".data-civil-status").textContent = person.civilstatus;
                     //placer klon i DOM
                     dest.appendChild(klon);
                 }

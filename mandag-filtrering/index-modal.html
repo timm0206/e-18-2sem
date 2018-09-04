@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hent JSON</title>
+    <style>
+        body {
+            background-color: rgb(240, 240, 240);
+            margin: 0 auto;
+        }
+
+        article {
+            padding: 1em;
+            background-color: white;
+        }
+
+        .data-container article img {
+            width: 100%;
+        }
+
+        .data-container {
+            margin: 0 auto;
+            display: grid;
+        }
+
+        @media screen and (min-width:580px) {
+            .data-container {
+                padding-left: 10%;
+                padding-right: 10%;
+                grid-gap: 5px;
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Modal element */
+
+        #modal {
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            background-color: rgba(0, 0, 0, .7);
+            text-align: center;
+            /*display: none;*/
+            opacity: 0;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+
+        #modal-content {
+            background-color: rgba(250, 250, 250, 1);
+            height: 70vh;
+            width: 70vw;
+            margin: auto;
+        }
+
+        #modal.vis {
+            /*display: block;*/
+            opacity: 1;
+            pointer-events: all;
+            transition: 0.5s;
+        }
+
+        .modal-billede {
+            height: 30vw;
+            width: auto;
+        }
+
+        /* Modal element slut */
+
+        header {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Modal element -->
+    <section id="modal">
+        <button>close</button>
+        <div id="modal-content">
+
+            <h2 class="modal-navn"></h2>
+            <img src="" alt="" class="modal-billede">
+        </div>
+    </section>
+    <!-- Modal element slut -->
+    <header>
+        <h1></h1>
+        <nav>
+            <button class="menu-item" data-civil-status="alle">Alle personer</button>
+            <button class="menu-item" data-civil-status="single">Single</button>
+            <button class="menu-item" data-civil-status="optaget">Optaget</button>
+
+        </nav>
+    </header>
+    <main class="container">
+        <section class="data-container"></section>
+    </main>
+    <template class="data-template">
+        <article class="person">
+            <h2></h2>
+            <img src="" alt=""><br>
+            Status: <a class="data-civil-status" href=""></a><br>
+
+        </article>
+    </template>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+        let modal = document.querySelector("#modal")
+
+        let dest = document.querySelector(".data-container"),
+            personer,
+            civilFilter = "alle";
+
+        async function hentJson() {
+            let myJson = await fetch("personliste.json");
+            personer = await myJson.json();
+            visPersoner();
+        }
+        document.querySelectorAll(".menu-item").forEach(knap => {
+            knap.addEventListener("click", filtrering)
+        });
+
+        function filtrering() {
+            dest.textContent = "";
+            civilFilter = this.getAttribute("data-civil-status");
+            visPersoner();
+        }
+
+
+        function visPersoner() {
+            let dest = document.querySelector(".data-container"),
+                temp = document.querySelector(".data-template");
+            document.querySelector("header h1").textContent = civilFilter;
+            //løb personlisten igennem og lav en klon
+            personer.forEach(person => {
+                if (person.civilstatus == civilFilter || civilFilter == "alle") {
+                    let klon = temp.cloneNode(true).content;
+                    //indsæt data i klonen
+                    klon.querySelector("h2").textContent = person.navn;
+                    klon.querySelector("img").src = person.billede;
+                    //Modal element
+                    klon.querySelector("img").addEventListener("click", () => {
+                        visModal(person);
+                    });
+                    //Modal element slut
+                    klon.querySelector(".data-civil-status").textContent = person.civilstatus;
+                    //placer klon i DOM
+                    dest.appendChild(klon);
+                }
+            })
+        }
+        //Modal element
+        function visModal(personen) {
+            modal.classList.add("vis");
+            modal.querySelector(".modal-navn").textContent = personen.navn;
+            modal.querySelector(".modal-billede").src = personen.billede;
+            modal.querySelector(".modal-navn").alt = "Photo af" + personen.navn;
+            modal.querySelector("button").addEventListener("click", skjulmodal);
+
+        }
+
+        function skjulmodal() {
+            modal.classList.remove("vis");
+            //window.scrollTo(0)
+        }
+        //Modal element slut
+    </script>
+</body>
+
+</html>
